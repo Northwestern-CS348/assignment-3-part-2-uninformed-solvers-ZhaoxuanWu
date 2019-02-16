@@ -3,7 +3,7 @@ from multiprocessing.pool import ThreadPool
 from multiprocessing.context import TimeoutError
 from student_code_game_masters import *
 from student_code_uninformed_solvers import *
-
+import sys, os
 
 class KBTest(unittest.TestCase):
 
@@ -204,6 +204,85 @@ class KBTest(unittest.TestCase):
             [13, ((5, 4, 8), (-1, 6, 1), (7, 3, 2))],
             [21, ((6, 5, 4), (1, -1, 8), (7, 3, 2))],
         ])
+
+    def test09_DFS_Hanoi(self):
+        th = TowerOfHanoiGame()
+        th.read('hanoi_5_all_disks_on_peg_one.txt')
+        required = [
+            'fact: (movable disk1 peg3 peg1)',
+            'fact: (movable disk1 peg3 peg2)',
+        ]
+        th.setWinningCondition(required, 'hanoi_all_forbidden.txt')
+        self.assertFalse(th.isWon())
+        solver = SolverDFS(th, ((),(),(1,2,3,4,5)))
+        self.runSolve(solver, 600)
+        self.assertTrue(th.isWon())
+
+    def test10_BFS_Hanoi(self):
+        th = TowerOfHanoiGame()
+        th.read('hanoi_5_all_disks_on_peg_one.txt')
+        required = [
+            'fact: (movable disk1 peg3 peg1)',
+            'fact: (movable disk1 peg3 peg2)',
+        ]
+        th.setWinningCondition(required, 'hanoi_all_forbidden.txt')
+        self.assertFalse(th.isWon())
+        solver = SolverBFS(th, ((),(),(1,2,3,4,5)))
+        self.runSolve(solver, 600)
+        self.assertTrue(th.isWon())
+
+    def test11_DFS_Hanoi(self):
+        th = TowerOfHanoiGame()
+        th.read('hanoi_5_smallest_on_three_second_smallest_on_two.txt')
+        required = [
+            'fact: (movable disk1 peg3 peg1)',
+            'fact: (movable disk1 peg3 peg2)',
+        ]
+        th.setWinningCondition(required, 'hanoi_all_forbidden.txt')
+        self.assertFalse(th.isWon())
+        solver = SolverDFS(th, ((),(),(1,2,3,4,5)))
+        self.runSolve(solver, 600)
+        self.assertTrue(th.isWon())
+
+    def test12_BFS_Hanoi(self):
+        th = TowerOfHanoiGame()
+        th.read('hanoi_5_smallest_on_three_second_smallest_on_two.txt')
+        required = [
+            'fact: (movable disk1 peg3 peg1)',
+            'fact: (movable disk1 peg3 peg2)',
+        ]
+        th.setWinningCondition(required, 'hanoi_all_forbidden.txt')
+        self.assertFalse(th.isWon())
+        solver = SolverBFS(th, ((),(),(1,2,3,4,5)))
+        self.runSolve(solver, 600)
+        self.assertTrue(th.isWon())
+
+
+    def test13_DFS_Hanoi(self):
+        th = TowerOfHanoiGame()
+        th.read('hanoi_5_two_smallest_on_peg_three.txt')
+        required = [
+            'fact: (movable disk1 peg3 peg1)',
+            'fact: (movable disk1 peg3 peg2)',
+        ]
+        th.setWinningCondition(required, 'hanoi_all_forbidden.txt')
+        self.assertFalse(th.isWon())
+        solver = SolverDFS(th, ((),(),(1,2,3,4,5)))
+        self.runSolve(solver, 600)
+        self.assertTrue(th.isWon())
+
+    def test14_BFS_Hanoi(self):
+        th = TowerOfHanoiGame()
+        th.read('hanoi_5_two_smallest_on_peg_three.txt')
+        required = [
+            'fact: (movable disk1 peg3 peg1)',
+            'fact: (movable disk1 peg3 peg2)',
+        ]
+        th.setWinningCondition(required, 'hanoi_all_forbidden.txt')
+        self.assertFalse(th.isWon())
+        solver = SolverBFS(th, ((),(),(1,2,3,4,5)))
+        self.runSolve(solver, 600)
+        self.assertTrue(th.isWon())
 
 
 if __name__ == '__main__':
