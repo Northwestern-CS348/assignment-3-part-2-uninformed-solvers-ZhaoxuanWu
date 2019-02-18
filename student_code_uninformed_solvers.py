@@ -107,6 +107,9 @@ class SolverDFS(UninformedSolver):
             True if the desired solution state is reached, False otherwise
         """
         ### Student code goes here
+        if self.currentState.state == self.victoryCondition:
+            return True
+
         # print("CURRENNNTTSTATE", self.gm.getGameState())
         movables = self.gm.getMovables()
         # print('movvvables', movables)
@@ -158,8 +161,6 @@ class SolverDFS(UninformedSolver):
                     self.currentState = self.currentState.parent
                     continue
 
-        if self.currentState.state == self.victoryCondition:
-            return True
         print("WRONGGGGGGGGGG", self.currentState.state, self.victoryCondition)
         return False
 
@@ -183,6 +184,9 @@ class SolverBFS(UninformedSolver):
             True if the desired solution state is reached, False otherwise
         """
         ### Student code goes here
+
+        if self.currentState.state == self.victoryCondition:
+            return True
 
         print("CURRENNNTTSTATE", self.gm.getGameState())
 
@@ -243,7 +247,5 @@ class SolverBFS(UninformedSolver):
                         break
             break
 
-        if self.currentState.state == self.victoryCondition:
-            return True
         print("WRONGGGGGGGGGG", self.currentState.state, self.victoryCondition)
         return False
